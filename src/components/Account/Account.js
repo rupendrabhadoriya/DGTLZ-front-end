@@ -37,13 +37,17 @@ function Account()
     }
 
     const responseFacebook = (response) => {
-        console.log(response);
-        routeChange('/welcome');
+        console.log('%%%%%%%%%%%%%%%%%', response);
+        if (response.status !== "unknown") {
+            routeChange('/welcome');
+        }
     }
     
     const responseGoogle = (response) => {
-        console.log(response);
-        routeChange('/welcome');
+        console.log('*********************', response);
+        if (!response.error) {
+            routeChange('/welcome');
+        }
     }
 
 
@@ -75,7 +79,7 @@ function Account()
                 <hr />
                 <div className="row">
                     <div className="col-md-3 offset-md-4">
-                        <FacebookLogin appId="444022854132394" autoLoad={true} fields="name,email,picture" callback={responseFacebook} 
+                        <FacebookLogin appId="444022854132394" autoLoad={false} fields="name,email,picture" callback={responseFacebook} 
                         cssClass="my-facebook-button-class" icon="fa-facebook-square" />
                     </div>
                     <div className="col-md-3">
