@@ -1,0 +1,59 @@
+.account{
+    padding: 150px 0;
+}
+
+.fa-facebook-square:before {
+    color: #3B5998;
+    font-size: x-large;
+    padding-right: 12px;
+}
+
+
+.my-facebook-button-class {
+    /* background-color: #3B5998; */
+    /* color: #ffffff; */
+    background: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 10px;
+    padding: 6px;
+    font-family: Roboto, sans-serif;
+    border-radius: 2px;
+    border: 1px solid transparent;
+}
+
+    /* background: rgb(255, 255, 255); */
+    /* border-radius: 2px; */
+    /* background-color: rgb(255, 255, 255);
+    display: inline-flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.54);
+    box-shadow: rgb(0 0 0 / 24%) 0px 2px 2px 0px, rgb(0 0 0 / 24%) 0px 0px 1px 0px;
+    padding: 0px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 500; */
+
+input,
+.btn {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  margin: 5px 0;
+  opacity: 0.85;
+  display: inline-block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; /* remove underline from anchors */
+}
+
+input:hover,
+.btn:hover {
+  opacity: 1;
+}
+
+@media(max-width: 414px){
+    .account{
+        padding: 70px 0;
+    }
+}
