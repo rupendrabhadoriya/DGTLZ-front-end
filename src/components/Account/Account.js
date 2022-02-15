@@ -28,7 +28,7 @@ function Account()
                 password: password,
             })
         };
-        fetch('https://dgtlz-backend.herokuapp.com/api/users/login', requestOptions)
+        fetch('http://dgtlz.finance:5000/api/users/login', requestOptions)
             .then(response => response.json())
             .then(data => {
                 console.log('success', data);

@@ -23,7 +23,7 @@ function Register()
         confirmPassword: cpassword,
       })
     };
-    fetch('https://dgtlz-backend.herokuapp.com/api/users/signup', requestOptions)
+    fetch('http://dgtlz.finance:5000/api/users/signup', requestOptions)
     .then(response => response.json())
     .then(data => {
       console.log('success', data);
