@@ -1,6 +1,12 @@
 .account{
     padding: 150px 0;
 }
+.container-login {
+    /* padding: 25px; */
+}
+.welcome-singup {
+    padding: 50px 75px;
+}
 
 .fa-facebook-square:before {
     color: #3B5998;

@@ -2,11 +2,19 @@ import './banner.css';
 import dollar from '../../../images/neve-dollar-1.png';
 import clock from '../../../images/neve-clock-1.png';
 import smile from '../../../images/neve-smile-1.png';
+import { useNavigate } from "react-router-dom";
 
 function Banner() {
     let linkpass = {
         link: '#',
     }
+
+    let navigate = useNavigate(); 
+    const routeChange = (url, data) =>{ 
+        let path = url; 
+        navigate(path, {state: data});
+    }
+    
     return ( 
         <div className="banner hasBgShadow">
             <div className="container mt-4">
@@ -29,7 +37,7 @@ function Banner() {
                     </div>
                     <div className="row text-center">
                         <div className="col-md-4 animate__animated animate__fadeInLeft mt-5">
-                            <a href={linkpass.link} className="btn btn-primary btn-lg text-uppercase">Create an Account</a> <br />
+                            <a onClick={()=> routeChange('/signup')} className="btn btn-primary btn-lg text-uppercase">Create an Account</a> <br />
                             <img src={ dollar} alt="" className="img-fluid mt-5 spinImage" />
                             <p className="mt-5 fs-5">HIGH ROI, UP TO 34% YEARLY GUARANTEED</p>
                         </div>

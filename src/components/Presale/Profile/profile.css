@@ -7,6 +7,11 @@
     color: #fff;
 }
 
+.text-blue {
+  color: #1359dc;
+  font-weight: bold;
+}
+
 .form-control {
     display: block;
     width: 60%;

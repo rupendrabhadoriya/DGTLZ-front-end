@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
-
+// import { config } from '../../config.js';
+import { getLogin } from '../../api';
 
 function Account()
 {
@@ -11,54 +12,46 @@ function Account()
     const [password, setPassword] = useState('');
 
     let navigate = useNavigate(); 
-    const routeChange = (url) =>{ 
+    const routeChange = (url, data) =>{ 
         let path = url; 
-        navigate(path);
+        navigate({pathname: path, state: data, search: `?post=${data.details._id}`});
     }
 
+    const login = async () => {
+      const requestOptions = {
+        body: JSON.stringify({
+          username: userEname,
+          password: password,
+        })
+      };
 
-    const login = () => {
-        console.log('login....');
-
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                username: userEname,
-                password: password,
-            })
-        };
-        fetch('http://dgtlz.finance:5000/api/users/login', requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log('success', data);
-                routeChange('/welcome');
-            });
+      const getData = await getLogin(requestOptions);
+      console.log('getData', getData);
+      
+      if (getData?.success === 'success') routeChange('/profile', getData);
     }
 
     const responseFacebook = (response) => {
-        console.log('%%%%%%%%%%%%%%%%%', response);
         if (response.status !== "unknown") {
-            routeChange('/welcome');
+            routeChange('/profile', response);
         }
     }
     
     const responseGoogle = (response) => {
-        console.log('*********************', response);
         if (!response.error) {
-            routeChange('/welcome');
+            routeChange('/profile', response);
         }
     }
 
 
     return (
-        <section className="account">
-            <div className='container'>
+        <section className="welcome">
+            <div className='container-login'>
                 <div className="row">
-                    <div className="col-md-6 offset-md-4">
+                    <div className="col-md-6 col-sm-6 offset-md-2">
                         <form method='post' action=''>
                             <div className="mb-3">
-                                <label className="form-label fs-5">Username or E-mail</label>
+                                <label className="form-label fs-5">E-mail</label>
                                 <input type="email" className="form-control p-3" value={userEname} onChange={(e)=> setUserEname(e.target.value)} />
                             </div>
                             <div className="mb-3">
@@ -78,7 +71,7 @@ function Account()
             <div className='container'>
                 <hr />
                 <div className="row">
-                    <div className="col-md-3 offset-md-4">
+                    <div className="col-md-3 col-sm-6 offset-md-2">
                         <FacebookLogin appId="444022854132394" autoLoad={false} fields="name,email,picture" callback={responseFacebook} 
                         cssClass="my-facebook-button-class" icon="fa-facebook-square" />
                     </div>

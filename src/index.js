@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter  } from 'react-router-dom';
+
+{/* <BrowserRouter basename="/http://dgtlz.finance"> */}
 
 ReactDOM.render(
-    <HashRouter>
+<BrowserRouter>
         <React.StrictMode>
             <App />
         </React.StrictMode>
-    </HashRouter>,
+    </BrowserRouter>,
     document.getElementById('root')
 );
 

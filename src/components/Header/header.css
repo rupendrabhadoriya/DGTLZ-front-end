@@ -4,6 +4,10 @@
     color: #003770;
 }
 
+.pointer {
+    cursor: pointer;
+}
+
 .btn-connect:hover {
     background-color: #01356e;
     color: #fff !important;
