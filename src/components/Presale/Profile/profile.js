@@ -26,7 +26,15 @@ function Profile()
               <div className="form-group">
                 <div className="col-xs-6">
                   <label><h4>First name</h4></label>
-                  <input type="text" className="form-control" name="first_name" id="first_name" value={userDetails?.name} placeholder="first name" title="enter your first name if any." />
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="first_name"
+                    id="first_name"
+                    value={userDetails?.name}
+                    placeholder="first name"
+                    title="enter your first name if any."
+                  />
                 </div>
               </div>
               
@@ -59,11 +67,12 @@ function Profile()
               </div>
 
               <div className="form-group">
-                <div className="col-xs-12">
                   <br />
-                  <button className="btn btn-lg btn-success" type="submit"><i className="glyphicon glyphicon-ok-sign"></i> Save</button>
+                  <p class="signin button"> 
+                    <input type="button" className="col-md-3" value="Update"/> 
+                  </p>
+                  {/* <button className="btn btn-lg btn-success" type="submit"><i className="glyphicon glyphicon-ok-sign"></i> Save</button> */}
                   {/* <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button> */}
-                </div>
               </div>
             </form>
           </div>

@@ -16,13 +16,19 @@ function LoginHeader()
   let navigate = useNavigate(); 
   const routeChange = (url, data) =>{ 
     let path = url; 
-    navigate({pathname: path, state: data, search: `?post=${userID}`});
+    if (userID === undefined) {
+      navigate({pathname: path, state: data});  
+    } else {
+      navigate({pathname: path, state: data, search: `?post=${userID}`});
+    }
   }
 
   const logout = ()=> {
     cleaarUser();
     localStorage.setItem('isLogin', false);
-    routeChange('/');
+    userID = undefined;
+    window.location.href = '/';
+    // routeChange('/');
   }
     
   return (

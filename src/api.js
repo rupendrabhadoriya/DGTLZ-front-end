@@ -36,10 +36,42 @@ export const getLogin = async (dataTosend) => {
   return responseData;
 };
 
+export const userSignup = async (dataTosend) => {
+  let responseData = '';
+
+  await axios.post('/users/signup', dataTosend.body, options)
+  .then(function (response) {
+    console.log(response.data);
+    responseData = response.data;
+  })
+  .catch(function (error) {
+    console.log('axios error', error);
+    responseData = error;
+  });
+
+  return responseData;
+};
+
 export const getUserData = async (dataTosend) => {
   let responseData = '';
 
   await axios.post('/users/userdetails', dataTosend, options)
+  .then(function (response) {
+    console.log(response.data);
+    responseData = response.data;
+  })
+  .catch(function (error) {
+    console.log('axios error', error);
+    responseData = error;
+  });
+
+  return responseData;
+};
+
+export const getSocialogin = async (dataTosend) => {
+  let responseData = '';
+
+  await axios.post('/users/socialogin', dataTosend.body, options)
   .then(function (response) {
     console.log(response.data);
     responseData = response.data;

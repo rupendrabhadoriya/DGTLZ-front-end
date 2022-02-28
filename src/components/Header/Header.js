@@ -11,6 +11,8 @@ import { isUserLogin } from '../../api';
 function Header()
 {
   const userdata = useLocation();
+
+  console.log('userdata', userdata);
   let userDetails = userdata.state;
   let userID = userdata.search.split('?post=');
   userID = userID[1];
@@ -21,7 +23,8 @@ function Header()
   const routeChange = (url, data) =>{ 
       let path = url; 
       // navigate(path, {state: data});
-      if (userID === undefined) {
+      console.log('userID', userID, url);
+      if (userID == undefined) {
         navigate({pathname: path, state: data});  
       } else {
         navigate({pathname: path, state: data, search: `?post=${userID}`});
@@ -70,29 +73,30 @@ function Header()
               className="collapse navbar-collapse justify-content-end"
               id="navbarSupportedContent"
             >
-            <ul className="navbar-nav mx-auto">
-              <li className="nav-item">
-                <Link className="nav-link fw-bold fs-5" to="/">Home</Link>
-              </li>
-              <li className="nav-item">
-                  <Link className="nav-link fw-bold fs-5" to="/signup">Account</Link>
-              </li>
-              <li className="nav-item">
-                  <Link className="nav-link fw-bold fs-5" to="/presale">Presale</Link>
-              </li>
-            </ul>
-
-            <div className="d-flex">
-                <button
-                    className="btn btn-outline-success btn-connect fw-bold fs-4"
-                    onClick={()=> routeChange('/login')}
-                    data-bs-toggle="modal"
-                >
-                    Sign In
-                </button>
+              <ul className="navbar-nav mx-auto">
+                <li className="nav-item">
+                  <Link className="nav-link fw-bold fs-5" to="/">Home</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link fw-bold fs-5" to="/signup">Account</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link fw-bold fs-5" to="/presale">Presale</Link>
+                </li>
+              </ul>
+              {
+                userdata.pathname == '/login' ? '' :
+                  <div className="d-flex">
+                    <button
+                      className="btn btn-outline-success btn-connect fw-bold fs-4"
+                      onClick={()=> routeChange('/login')}
+                    >
+                      Sign In
+                    </button>
+                  </div>
+              }
             </div>
-                </div>
-            </div>
+          </div>
         </nav>
         :
         <LoginHeader />
