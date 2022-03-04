@@ -84,8 +84,21 @@ export const getSocialogin = async (dataTosend) => {
   return responseData;
 };
 
+export const kycUpdate = async (dataTosend) => {
+  let responseData = '';
 
+  await axios.post('/users/imageUpload', dataTosend, options)
+  .then(function (response) {
+    console.log(response.data);
+    responseData = response.data;
+  })
+  .catch(function (error) {
+    console.log('axios error', error);
+    responseData = error;
+  });
 
+  return responseData;
+};
 
 export const cleaarUser = () => {
   userId = 0;
