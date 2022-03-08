@@ -14,13 +14,13 @@ function Kyc()
   const [msg, setMsg] = useState('');
 
   const uploadImage = async () => {
-    // console.log('item list ', item);
+    console.log('item list ', item);
     const result = await kycUpdate(item);
 
     console.log('image upload----', result);
 
-    if(result?.success == 'sucsess') {
-      setMsg('Kyc Updated');
+    if(result?.success == 'success') {
+      setMsg('Kyc Updated, It will take some time to reflect on your accont');
     } else {
       setMsg('Please try again later');
     }
@@ -40,6 +40,20 @@ function Kyc()
             <form className="form" id="registrationForm">
               <div className="form-group">
                 <div className="col-xs-6">
+                  <label>
+                    <h4>Full Name</h4> <small className='info-msg'>Same as present in your Document</small>
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="your_name"
+                    id="your_name"
+                    placeholder="Enter Your Name"
+                    title="Your Name."
+                    onChange={e => setItem({ ...item, docName: e.target.value })}
+                  />
+                </div>
+                <div className="col-xs-6">
                   <label><h4>Document name</h4></label>
                   <input
                     type="text"
@@ -56,7 +70,17 @@ function Kyc()
               <div className="form-group">
                 <div className="col-xs-6">
                   <label><h4>Documnet Type</h4></label>
-                  <input
+                  <select 
+                    className="form-control"
+                    value={item.docType} 
+                    onChange={e => setItem({ ...item, docType: e.target.value })}
+                  >
+                    <option value="">Select</option>
+                    <option value="Driving license">Driving license</option>
+                    <option value="passport">Passport</option>
+                    <option value="National ID card"> National ID card</option>
+                  </select>
+                  {/* <input
                     type="text"
                     className="form-control"
                     name="doc_type"
@@ -64,27 +88,32 @@ function Kyc()
                     placeholder="Enter Document Type"
                     title="Document Type."
                     onChange={e => setItem({ ...item, docType: e.target.value })}
-                  />
+                  /> */}
                 </div>
               </div>
-        
-              <div className="form-group">
-                <div className="col-xs-6">
-                  <label><h4>Upload</h4></label>
-                  <FileBase64
-                    type="file"
-                    multiple={false}
-                    onDone={({ base64 }) => setItem({ ...item, image: base64 })}
-                  />
-                  {/* <input type="file" className="form-control" name="file" id="file" /> */}
-                </div>
-              </div>
-
-              <div className="form-group">
-                <p class="signin button"> 
-                  <input type="button" className="col-md-3" onClick={()=> uploadImage()} value="Update"/> 
-                </p>
-              </div>
+                  
+              {
+                item.docType != '' ? 
+                <>
+                  <div className="form-group">
+                    <div className="col-xs-6">
+                      <label><h4>Upload</h4></label>
+                      <FileBase64
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) => setItem({ ...item, image: base64 })}
+                      />
+                    </div>
+                  </div>
+                
+                  <div className="form-group">
+                    <p class="signin button"> 
+                      <input type="button" className="col-md-3" onClick={()=> uploadImage()} value="Update"/> 
+                    </p>
+                  </div>
+                </>
+                : '' 
+              }
             </form>
           </div>
         </div>

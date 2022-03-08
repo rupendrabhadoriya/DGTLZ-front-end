@@ -8,6 +8,51 @@
     cursor: pointer;
 }
 
+nav {
+  /* background-image: url('../../images/dgtl.jpg'); */
+  background-color: #fff;
+  box-shadow: 0 0 25px 0 black;
+}
+
+
+.nav-item .nav-link, .nav-item .nav-link.active, .nav-item .nav-link:hover {
+  border: 0;
+  /* border-bottom: 1px solid grey;
+  color: gray; */
+}
+
+.nav-item .nav-link.active {
+  color: #000000;
+  border-radius: 0;
+  border-bottom: 2px solid blue;
+}
+
+.navbar-nav li {
+  padding-right: 25px;
+}
+.nav-item .nav-link {
+  /* color: gray;
+  border: 0;
+  border-bottom: 1px solid grey; */
+}
+
+.nav-item .nav-link:hover {
+  border: 0;
+  /* border-bottom: 1px solid grey; */
+}
+
+.nav-item .nav-link.active {
+  color: #000000;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 2px solid blue;
+}
+
+
+
+
+
+
 .btn-connect:hover {
     background-color: #01356e;
     color: #fff !important;

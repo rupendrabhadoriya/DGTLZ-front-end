@@ -101,7 +101,6 @@ function Header()
         :
         <LoginHeader />
       }
-      <hr />
         </>
 
     );

@@ -2,7 +2,7 @@ import './header.css';
 import logo from '../../images/logo.png';
 import {Link} from 'react-router-dom';
 import {useLocation} from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { cleaarUser } from '../../api';
 
 
@@ -30,8 +30,16 @@ function LoginHeader()
     window.location.href = '/';
     // routeChange('/');
   }
+
+  // const [activeIndex, setActiveIndex] = React.useState(0);
+
+  // const handleOnClick = index => {
+  //   setActiveIndex(index); // remove the curly braces
+  // };
+  
     
   return (
+    
   <>
     <div className="loader-wrapper">
       <div className="loader"></div>
@@ -66,16 +74,17 @@ function LoginHeader()
         >
             <ul className="navbar-nav mx-auto">
               <li className="nav-item">
-                <a className="nav-link fw-bold fs-5 pointer" onClick={()=> routeChange('/dashboard')}>Dashboard |</a>
+                {/* <NavLink className="nav-link fw-bold fs-5 pointer" to="/yourPath" activeClassName="is-active">Home</NavLink> */}
+                <a className="nav-link fw-bold fs-5 pointer" id='das' onClick={()=> routeChange('/dashboard', 'das')}>Dashboard </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link fw-bold fs-5 pointer" onClick={()=> routeChange('/profile')}>Profile |</a>
+                <a className="nav-link fw-bold fs-5 pointer" id='prof' onClick={()=> routeChange('/profile', 'prof')}>Profile </a>
               </li>
               <li className="nav-item">
-                  <a className="nav-link fw-bold fs-5 pointer" onClick={()=> routeChange('/plan')}>My Investment |</a>
+                  <a className="nav-link fw-bold fs-5 pointer" id='inve' onClick={()=> routeChange('/plan', 'inve')}>My Investment </a>
               </li>
               <li className="nav-item">
-                  <a className="nav-link fw-bold fs-5 pointer" onClick={()=> routeChange('/supportcenter')}>My Support Center |</a>
+                  <a className="nav-link fw-bold fs-5 pointer" id='mysup' onClick={()=> routeChange('/supportcenter', 'mysup')}>My Support Center </a>
               </li>
               <li className="nav-item">
               <a className="nav-link fw-bold fs-5 pointer" onClick={()=> logout('/')}>Logout</a>

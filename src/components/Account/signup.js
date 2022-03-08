@@ -12,7 +12,8 @@ import logo from '../../images/logo.png';
 function Register()
 {
   const [name, setName] = useState('');
-  const [username, setUserName] = useState('');
+  // const [username, setUserName] = useState('');
+  const [lastname, setLastName] = useState('');
   const [emailid, setEmailId] = useState('');
   const [password, setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
@@ -26,9 +27,14 @@ function Register()
   const routeChange = (url, data) =>{ 
     let path = url;
     if (userID === undefined) {
-      navigate({pathname: path, state: data});
+      navigate({pathname: path, state: {detais: data?.details}});
     } else {
-      navigate({pathname: path, state: data, search: `?post=${data?.details?._id}`});
+      // const temp = {
+      //   state: data,
+      // };
+      
+      // navigate(path, temp, {search: `?post=${data?.details?._id}`});
+      navigate({pathname: path, state: {detais: 'this data'}, search: `?post=${data?.details?._id}`});
     }
   }
 
@@ -80,15 +86,15 @@ function Register()
   const signup = async () => 
   {
     const validEmailid  = validEmail(emailid);
-    const validUsername = minMaxLength(username, 1);
+    const validLastName = minMaxLength(lastname, 1);
     const validName     = minMaxLength(name, 1);
     const validPassword = minMaxLength(password, 1);
 
     if (validName) {
       setMsg('Please enter vaild Name');
       return;
-    } else if (validUsername) {
-      setMsg('Please enter valid User Name');
+    } else if (validLastName) {
+      setMsg('Please enter valid Last Name');
       return;
     } else if (!validEmailid) {
       setMsg('Please enter valid Email Id');
@@ -104,7 +110,8 @@ function Register()
     const requestOptions = {
       body: JSON.stringify({
         name: name,
-        username: username,
+        lastname: lastname,
+        // username: username,
         email: emailid,
         password: password,
         confirmPassword: cpassword,
@@ -125,10 +132,12 @@ function Register()
         };
         console.log('postdata', postdata);
         setName('');
-        setUserName('');
+        setLastName('');
+        // setUserName('');
         setEmailId('');
         setPassword('');
         setCpassword('');
+        localStorage.setItem('iSignup', 'success');
         routeChange('/login', postdata);
     } else {
       setMsg(response?.errors?.invalidCredentials);
@@ -160,16 +169,16 @@ function Register()
   }
 
 return (
-  <section>
+  <section className="welcome">
       <div className="row">
         <div className="col-md-12 col-sm-6">
         <div id="wrapper">
-          <div id="login" className="animate form">
+          <div id="login-1" className="animate form">
             <img src={ logo } width="130" height="100%" alt="Logo" />
             <form> 
-              <h1 className="offset-md-3"> Sign up </h1> 
+              <h1 className="offset-md-3">  </h1> 
               <p> 
-                <h3 className='error-msg form-label fs-5'>{msg ? msg : '' }</h3>
+                <h3 className='info-msg form-label fs-5'>{msg ? msg : '' }</h3>
                 <label className="uname" data-icon="u">Your name</label>
                 <input
                   id="namesignup"
@@ -179,20 +188,20 @@ return (
                   onChange={(e)=> setName(e.target.value)}
                   required="required"
                   type="text"
-                  placeholder="myname"
+                  placeholder="name"
                 />
               </p>
               <p> 
-                <label className="uname" data-icon="u">Your username</label>
+                <label className="uname" data-icon="u">Last Name</label>
                 <input
                   id="usernamesignup"
                   className='form-control'
                   name="usernamesignup"
-                  value={username}
-                  onChange={(e)=> setUserName(e.target.value)}
+                  value={lastname}
+                  onChange={(e)=> setLastName(e.target.value)}
                   required="required"
                   type="text"
-                  placeholder="username"
+                  placeholder="last name"
                 />
               </p>
               <p> 
@@ -236,11 +245,15 @@ return (
               </p>
               <p class="signin button"> 
                 <input type="button" onClick={() =>signup()} value="Sign up"/> 
+                <span className=' offset-md-1'>
+                  Already a member ?  &nbsp; 
+                  <a onClick={()=> routeChange('/login')} className="to_register pointer">Go and log in </a>
+                </span>
               </p>
-              <p class="change_link">  
+              {/* <p class="change_link">  
                 Already a member ?
                 <a onClick={()=> routeChange('/login')} className="to_register pointer"> Go and log in </a>
-              </p>
+              </p> */}
             </form>
             <hr />
             <div className="row">

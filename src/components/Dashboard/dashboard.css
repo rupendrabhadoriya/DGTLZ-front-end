@@ -9,3 +9,17 @@
   display: flex;
 }
 
+.info-msg {
+  color: #ddf21a
+}
+
+.loading-load {
+  height: 50px;
+}
+
+.safeBlock {
+  height: 430px;
+}
+.mx-auto {
+  margin-right: auto !important;
+}

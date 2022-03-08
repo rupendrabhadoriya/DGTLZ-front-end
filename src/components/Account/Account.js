@@ -1,5 +1,5 @@
 import './account.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import FacebookLogin from 'react-facebook-login';
 import GoogleLogin from 'react-google-login';
@@ -17,20 +17,28 @@ function Account()
 
     const userdata = useLocation();
     let userID = userdata.search.split('?post=');
-    if(userdata?.state?.details?.status == 'Registered') {
-      setSuccessMsg('Registered');
-    }
     userID = userID[1];
+
+    useEffect(() => {
+      if(localStorage.getItem('iSignup') == 'success') {
+        setSuccessMsg('Registered successfully');
+      }
+
+      setTimeout(() => {
+        localStorage.setItem('iSignup', '');
+        setSuccessMsg('');
+      }, 5000);
+    }, []);
 
     let navigate = useNavigate(); 
     const routeChange = (url, data) =>{ 
-      console.log(data)
+      console.log('data===-==-=-=-=-=-', data)
         let path = url; 
         // navigate({pathname: path, state: data, search: `?post=${data?.details?._id}`});
         if (userID === undefined) {
-          navigate({pathname: path, state: data});  
+          navigate({pathname: path, state: data?.details});  
         } else {
-          navigate({pathname: path, state: data, search: `?post=${data}`});
+          navigate({pathname: path, state: data?.details, search: `?post=${data}`});
         }
     }
 
@@ -109,7 +117,7 @@ function Account()
     }
 
     return (
-      <section className="">
+      <section className="welcome">
         <div className='container-login'>
           <div className="row">
             <div className="col-md-12 col-sm-6">
@@ -117,14 +125,14 @@ function Account()
                   <a class="hiddenanchor" id="toregister"></a>
                   <a class="hiddenanchor" id="tologin"></a>
                   <div id="wrapper">
-                    <div id="login" class="animate form">
+                    <div id="login-1" class="animate form">
                       <img src={ logo } width="130" height="100%" alt="Logo" />
                       <form  action="" className='col-md-6 offset-md-3' autocomplete="on"> 
-                        <h1>Log in</h1>
-                        <h3 className='error-msg form-label fs-5'>{msg ? msg : '' }</h3>
+                        {/* <h1>Log in</h1> */}
+                        <h3 className='info-msg form-label fs-5'>{msg ? msg : '' }</h3>
                         <h3 className='success-msg form-label fs-5'>{successMsg ? successMsg : '' }</h3>
                         <p> 
-                          <label class="uname"> Your email </label>
+                          <label class="uname"> Your email <span className='info-msg'>*</span></label>
                           <input
                             id="username"
                             name="username"
@@ -136,7 +144,7 @@ function Account()
                             placeholder="mymail@mail.com"/>
                         </p>
                         <p> 
-                          <label for="password" class="youpasswd"> Your password </label>
+                          <label for="password" class="youpasswd"> Your password <span className='info-msg'>*</span> </label>
                           <input
                             id="password"
                             name="password"
@@ -152,21 +160,26 @@ function Account()
                           <input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" /> 
                           <label for="loginkeeping">Keep me logged in</label>
                         </p>
-                        <p class="login button"> 
+                        <p class="login button"> <br />
                           <input type="button"  onClick={() =>login()} value="Login" /> 
+                          <span className=' offset-md-1'>
+                            Not a member yet ?  &nbsp; 
+                            <a onClick={()=> routeChange('/signup')} class="to_register pointer">Join us</a>
+                          </span>
+                          <p>
+                          
                         </p>
-                        <p class="change_link">
-                          Not a member yet ?
-                          <a onClick={()=> routeChange('/signup')} class="to_register pointer">Join us</a>
                         </p>
                       </form>
                       <hr />
                       <div className="row">
                         <div className="col-md-3 col-sm-6 offset-md-3">
+                          {/* https://www.npmjs.com/package/react-facebook-login */}
                           <FacebookLogin appId="444022854132394" autoLoad={false} fields="name,email,picture" callback={responseFacebook} 
                           cssClass="kep-login-facebook[4]" icon="fa-facebook-square" />
                         </div>
                         <div className="col-md-3">
+                          {/* https://www.npmjs.com/package/react-google-login */}
                           <GoogleLogin
                               clientId="308643233981-meuh47926i4dioobe2tffvccmqtotkg6.apps.googleusercontent.com"
                               buttonText="Login WIth Google"

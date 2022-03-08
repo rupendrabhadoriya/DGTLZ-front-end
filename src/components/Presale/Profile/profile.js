@@ -12,20 +12,23 @@ function Profile()
 
   useEffect(async ()=> {
     const response = await getUserData({id: userID});
-    setUserDetails(response.result);
+    setUserDetails(response.details);
     console.log('userDetails---', userDetails);
   }, []);
 
   return ( 
-    <section className='welcome'>
-      <div className="container bootstrap snippet">
-        <div className="row"> <div className="col-sm-10"><h1>Profile</h1></div></div>
-        <div className="row"> <div className="col-sm-9">
-          <div className="tab-pane active"> <hr />
-            <form className="form" id="registrationForm">
+    <section className="welcome">
+    <div className='container-login'>
+      <div className="row">
+        <div className="col-md-12 col-sm-6">
+            <div className='container-login' id="container_demo" >
+              <div id="wrapper">
+                <div id="login-1" class="animate form">
+                  {/* <img src={ logo } width="130" height="100%" alt="Logo" /> */}
+                  <form  action="" className='col-md-12' autocomplete="on">
               <div className="form-group">
-                <div className="col-xs-6">
-                  <label><h4>First name</h4></label>
+                <p>
+                  <label>First name</label>
                   <input
                     type="text"
                     className="form-control"
@@ -35,36 +38,36 @@ function Profile()
                     placeholder="first name"
                     title="enter your first name if any."
                   />
-                </div>
+                </p>
               </div>
               
-              <div className="form-group">
+              <p>
                 <div className="col-xs-6">
-                  <label><h4>Last name</h4></label>
-                  <input type="text" className="form-control" name="last_name" id="last_name" value={userDetails?.lname} placeholder="last name" title="enter your last name if any." />
+                  <label>Last name</label>
+                  <input type="text" className="form-control" name="last_name" id="last_name" value={userDetails?.lastname} placeholder="last name" title="enter your last name if any." />
                 </div>
-              </div>
+              </p>
         
-              <div className="form-group">
+              <p>
                 <div className="col-xs-6">
-                  <label><h4>Mobile</h4></label>
+                  <label>Mobile</label>
                   <input type="text" className="form-control" name="mobile" id="mobile" value={userDetails?.phone} placeholder="enter phone" title="enter your phone number if any." />
                 </div>
-              </div>
+              </p>
 
-              <div className="form-group">
+              <p>
                 <div className="col-xs-6">
-                  <label><h4>Email</h4></label>
+                  <label>Email</label>
                   <input type="email" className="form-control" disabled name="email" id="email" value={userDetails?.email} placeholder="you@email.com" title="enter your email." />
                 </div>
-              </div>
+              </p>
 
-              <div className="form-group">
+              <p>
                 <div className="col-xs-6">
-                  <label><h4>Location</h4></label>
+                  <label>Location</label>
                   <input type="email" className="form-control" id="location" value={userDetails?.location} placeholder="somewhere" title="enter a location" />
                 </div>
-              </div>
+              </p>
 
               <div className="form-group">
                   <br />
@@ -79,6 +82,8 @@ function Profile()
         </div>
       </div>
       </div>  
+      </div>  
+    </div>  
     </section>
     );
 }
